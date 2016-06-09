@@ -7,7 +7,7 @@ class Simple(object):
     pass
 
 
-class SomethingWithDefinitions(object):
+class SomethingWithOneDefinition(object):
     def get_name(self):
         return 'foo'
 
@@ -20,10 +20,10 @@ class Simple(object):
     pass
 """)
 
-    def test_something_with_definitions(self):
-        output = flatten(SomethingWithDefinitions)
+    def test_something_with_one_definition(self):
+        output = flatten(SomethingWithOneDefinition)
         self.assertEqual(output, """\
-class SomethingWithDefinitions(object):
+class SomethingWithOneDefinition(object):
     def get_name(self):
         return 'foo'
 """)
