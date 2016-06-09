@@ -12,6 +12,14 @@ class SomethingWithOneDefinition(object):
         return 'foo'
 
 
+class SomethingWithTwoDefinitions(object):
+    def get_name(self):
+        return 'foo'
+
+    def get_second(self):
+        return 'bar'
+
+
 class FlatExampleTests(TestCase):
     def test_simple(self):
         output = flatten(Simple)
@@ -26,4 +34,15 @@ class Simple(object):
 class SomethingWithOneDefinition(object):
     def get_name(self):
         return 'foo'
+""")
+
+    def test_something_with_two_definitions(self):
+        output = flatten(SomethingWithTwoDefinitions)
+        self.assertEqual(output, """\
+class SomethingWithTwoDefinitions(object):
+    def get_name(self):
+        return 'foo'
+
+    def get_second(self):
+        return 'bar'
 """)

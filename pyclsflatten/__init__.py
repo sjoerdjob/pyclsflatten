@@ -12,8 +12,9 @@ def _get_defined_methods(cls):
     for name, val in cls.__dict__.items():
         if inspect.isfunction(val):
             lines, lnum = inspect.getsourcelines(val)
-            ret.append((name, inspect.getsource(val)))
-    return ret
+            ret.append((name, inspect.getsource(val), lnum))
+    ret.sort(key=operator.itemgetter(2))
+    return list(map(operator.itemgetter(0, 1), ret))
 
 
 def flatten(cls):
